@@ -31,6 +31,3 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          sudo yum install git -y
-          echo $HOME
-          echo ${{ secrets.DB_NAME }}
