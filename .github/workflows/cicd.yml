@@ -32,4 +32,3 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           echo $HOME
-          sudo yum install git -y
