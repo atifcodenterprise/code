@@ -33,4 +33,4 @@ jobs:
           echo test, and deploy your project.
           echo $HOME
           pwd
-          echo ${{ secrets.DB_NAME }} - ${{ secrets.ENV }}
+          echo ${{secrets.DB_NAME}}
