@@ -23,7 +23,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASS
         
     - name: Build the Docker image
-      run: docker build -t atifcodenterprise2150/testing_repo:latest .
+      run: docker build -t atifcodenterprise2150/testing_repo:0.1 .
     
     - name: Docker Push
       env: 
