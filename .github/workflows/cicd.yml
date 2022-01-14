@@ -27,7 +27,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: "orangebuddies-repo"
+          ECR_REPOSITORY: orangebuddies-repo
         run: |
           # Build docker container
           # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
@@ -41,7 +41,7 @@ jobs:
         id: push-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: "orangebuddies-repo"
+          ECR_REPOSITORY: orangebuddies-repo
         run: |
           # Push image to ECR
           echo "Pushing image to ECR..."
@@ -51,8 +51,8 @@ jobs:
       - name: Redeploy ECS service
         if: github.ref == 'refs/heads/master'    
         env:
-          ECS_CLUSTER_NAME: "ob_ECS_cluster"
-          ECS_SERVICE_NAME: "orangebuddies-repo"   
+          ECS_CLUSTER_NAME: ob_ECS_cluster
+          ECS_SERVICE_NAME: orangebuddies-repo   
         run: |
           aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME --force-new-deployment"
           echo "ECS Service reloaded"
