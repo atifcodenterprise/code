@@ -33,7 +33,7 @@ jobs:
           # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           echo "Built image..."
           echo $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
-          echo '${{ toJSON(github.event) }}'
+          echo '${{ toJSON(steps.login-ecr.outputs) }}'
 
       - name: Debug CICD
         uses: hmarr/debug-action@v2
