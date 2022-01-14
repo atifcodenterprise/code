@@ -32,9 +32,11 @@ jobs:
           # Build docker container
           # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           echo "Built image..."
-         # echo $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          # echo $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
           echo '${{ toJSON(github.ref) }}'
 
+      - name: Debug CICD
+        uses: hmarr/debug-action@v2
       # - name: Push the image
       #   if: github.ref == 'refs/heads/master'
       #   id: push-image
