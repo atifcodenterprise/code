@@ -23,10 +23,10 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASS
         
     - name: Build the Docker image
-      run: docker build -t atifcodenterprise2150/testing_repo:0.1 .
+      run: docker build -t atifcodenterprise2150/testing_repo:latest .
     
     - name: Docker Push
       env: 
         DOCKER_USER: atif@codenterprise.com
         DOCKER_PASS: Ce2150012
-      run: docker push atifcodenterprise2150/testing_repo
+      run: docker push atifcodenterprise2150/testing_repo:0.1
