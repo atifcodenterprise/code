@@ -51,7 +51,7 @@ jobs:
       - name: Redeploy ECS service
         if: github.ref == 'refs/heads/master'    
         env:
-          ECS_CLUSTER_NAME: ${{ steps.login-ecr.outputs.registry }}
+          ECS_CLUSTER_NAME: "ob_ECS_cluster"
           ECS_SERVICE_NAME: "orangebuddies-repo"   
         run: |
           echo "aws ecs update-service --cluster ${{ ECS_CLUSTER_NAME }} --service ${{ ECS_SERVICE_NAME }} --force-new-deployment"
