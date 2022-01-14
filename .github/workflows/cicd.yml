@@ -27,24 +27,23 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.repository.name }}
+          ECR_REPOSITORY: "orangebuddies-repo"
         run: |
           # Build docker container
           # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           echo "Built image..."
-          # echo $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
-          echo '${{ toJSON(secrets) }}'
+           echo $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+          # echo ${{ github.event.repository.name }}
+          # echo '${{ toJSON(secrets) }}'
 
-      - name: Debug CICD
-        uses: hmarr/debug-action@v2
-      # - name: Push the image
-      #   if: github.ref == 'refs/heads/master'
-      #   id: push-image
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: ${{ github.event.repository.name }}
-      #   run: |
-      #     # Push image to ECR
-      #     echo "Pushing image to ECR..."
-      #     docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
-      #     echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA"
+      - name: Push the image
+        if: github.ref == 'refs/heads/master'
+        id: push-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ github.event.repository.name }}
+        run: |
+          # Push image to ECR
+          echo "Pushing image to ECR..."
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA"
