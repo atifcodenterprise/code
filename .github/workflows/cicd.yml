@@ -34,7 +34,7 @@ jobs:
           echo "Built image..."
           # echo $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
           # echo ${{ github.event.repository.name }}
-          # echo '${{ toJSON(secrets) }}'
+           echo '${{ toJSON(secrets) }}'
 
       # - name: Push the image
       #   if: github.ref == 'refs/heads/master'
