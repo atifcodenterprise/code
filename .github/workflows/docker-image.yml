@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Docker Login
+      env: 
+        DOCKER_USER: atif@codenterprise.com
+        DOCKER_PASS: Ce2150012
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASS
+        
+    - name: Build the Docker image
+      run: docker build -t atifcodenterprise2150/testing_repo:latest .
+    
+    - name: Docker Push
+      env: 
+        DOCKER_USER: atif@codenterprise.com
+        DOCKER_PASS: Ce2150012
+      run: docker push atifcodenterprise2150/testing_repo
