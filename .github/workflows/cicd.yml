@@ -34,6 +34,9 @@ jobs:
           echo "Built image..."
           echo $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
           echo ${{ github.event }}
+          
+      - name: Debug CICD
+        uses: hmarr/debug-action@v2
       # - name: Push the image
       #   if: github.ref == 'refs/heads/master'
       #   id: push-image
