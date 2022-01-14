@@ -36,17 +36,17 @@ jobs:
           # echo ${{ github.event.repository.name }}
            echo '${{ toJSON(secrets) }}'
 
-      # - name: Push the image
-      #   if: github.ref == 'refs/heads/master'
-      #   id: push-image
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: "orangebuddies-repo"
-      #   run: |
-      #     # Push image to ECR
-      #     echo "Pushing image to ECR..."
-      #     #docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
-      #     echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA"
+      - name: Push the image
+        if: github.ref == 'refs/heads/master'
+        id: push-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: "orangebuddies-repo"
+        run: |
+          # Push image to ECR
+          echo "Pushing image to ECR..."
+          #docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA"
         
       # - name: Redeploy ECS service
       #   if: github.ref == 'refs/heads/master'    
