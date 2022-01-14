@@ -17,7 +17,7 @@ jobs:
     
     - name: Docker Login
       env: 
-        DOCKER_USER: atif@codenterprise.com
+        DOCKER_USER: atifcodenterprise2150
         DOCKER_PASS: Ce2150012
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASS
