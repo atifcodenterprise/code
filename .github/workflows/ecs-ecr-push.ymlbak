@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-# default ENV varialbes
+# default Global ENV varialbes
 env:
   AWS_REGION: eu-west-1 # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: nginx # set this to your Amazon ECR repository name
