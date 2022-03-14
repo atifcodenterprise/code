@@ -26,7 +26,7 @@ jobs:
 
       - name: Add secrets to Task Definition
         run: |
-          sed -i "s/<CONTAINER_NAME>/orangutancluster-container/g" task_definition.json 
+          sed -i "s/<CONTAINER_NAME>/${{secrets.CONTAINER_NAME}}/g" task_definition.json 
           
         env:
           JWT_SECRET: ${{secrets.JWT_SECRET}}
