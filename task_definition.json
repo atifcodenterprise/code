@@ -46,7 +46,7 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "${{ env.CONTAINER_NAME }}"
+      "name": "orangutancluster-container"
     }
   ],
   "placementConstraints": [],
