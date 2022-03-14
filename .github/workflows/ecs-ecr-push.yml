@@ -24,6 +24,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Add secrets to Task Definition
+        run: |
+          sed -i "s/<CONTAINER_NAME>/orangutancluster-container/g" task_definition.json 
+          
+        env:
+          JWT_SECRET: ${{secrets.JWT_SECRET}}
+          MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
