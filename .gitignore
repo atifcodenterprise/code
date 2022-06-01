@@ -1,1 +1,3 @@
 ECS_EC2/.terraform
+ECS_EC2/terraform.tfstate
+ECS_EC2/terraform.tfstate.backup
