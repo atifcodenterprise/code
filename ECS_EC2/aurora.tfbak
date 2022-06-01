@@ -1,0 +1,38 @@
+esource "aws_security_group" "management" {
+  name        = "RDS-management"
+  description = "Allow MySQL inbound"
+  vpc_id      = data.aws_vpc.main.id
+
+  ingress {
+    description      = "MySQL"
+    from_port        = 3306
+    to_port          = 3306
+    protocol         = "tcp"
+    cidr_blocks      = [data.aws_subnet.db_subnet_1.cidr_block, data.aws_subnet.db_subnet_2.cidr_block, data.aws_subnet.db_subnet_3.cidr_block, data.aws_subnet.app-1.cidr_block, data.aws_subnet.app-2.cidr_block, data.aws_subnet.app-3.cidr_block]
+  }
+}
+
+resource "aws_rds_cluster" "RDS-cluster" {
+  cluster_identifier          = "drey-cluster"
+  engine                      = "aurora-mysql"
+  engine_version              = "8.0.23.mysql_aurora.3.01.0"
+  availability_zones          = ["eu-west-1a","eu-west-1b","eu-west-1c"]
+  database_name               = "Squirrel"
+  master_username             = "admin"
+  master_password             = "44*F&etq8e"
+  backup_retention_period     = "7"
+  preferred_backup_window     = "02:00-04:00"
+  db_subnet_group_name        = resource.aws_db_subnet_group.dbgroup.id
+  vpc_security_group_ids      = [resource.aws_security_group.management.id]
+  kms_key_id                  = resource.aws_kms_key.RDS_key.id
+  storage_encrypted           = true
+}
+ 
+resource "aws_rds_cluster_instance" "RDS-Cluster_instance" {
+  count                       = 1
+  identifier                  = "drey-db-${count.index}"
+  cluster_identifier          = aws_rds_cluster.RDS-cluster.id
+  instance_class              = "db.t3.micro"
+  engine                      = aws_rds_cluster.RDS-cluster.engine
+  engine_version              = aws_rds_cluster.RDS-cluster.engine_version
+}

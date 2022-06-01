@@ -1,0 +1,17 @@
+resource "aws_efs_file_system" "efs" {
+  creation_token   = "${lower(var.cluster_prefix)}-efs-disk"
+  performance_mode = "generalPurpose"
+  throughput_mode  = "bursting"
+  encrypted        = "true"
+  tags = {
+    Name = "${var.cluster_prefix}-efs-disk"
+  }
+}
+
+
+resource "aws_efs_mount_target" "efs-mt" {
+  count           = var.az_count
+  file_system_id  = aws_efs_file_system.efs.id
+  subnet_id       = aws_subnet.public[count.index].id
+  security_groups = [aws_security_group.efs-sg.id]
+}
