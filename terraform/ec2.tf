@@ -1,5 +1,5 @@
 resource "aws_security_group" "aws_sg" {
-  name = "security group from terraform"
+  name = "security group from TF"
 
   ingress {
     description = "SSH from the internet"
@@ -38,7 +38,7 @@ resource "aws_instance" "aws_ins_web" {
   key_name                    = "aws-key-pair" # your key here
 
   tags = {
-    Name = "my own instance"
+    Name = "my own instance2"
   }
 
 }
